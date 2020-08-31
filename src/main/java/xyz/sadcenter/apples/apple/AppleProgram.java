@@ -130,7 +130,6 @@ public final class AppleProgram extends Thread {
         if (!Main.isEnabled())
             this.stop();
 
-
         clickMouse(16);
         sleep(50L);
         clickMouse(16);
@@ -144,8 +143,7 @@ public final class AppleProgram extends Thread {
         sleep(50L);
 
         clickKey(KeyEvent.VK_1);
-        sleep(50L);
-
+       
         if (repair < System.currentTimeMillis()) {
             repair = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(seconds);
             repair();
