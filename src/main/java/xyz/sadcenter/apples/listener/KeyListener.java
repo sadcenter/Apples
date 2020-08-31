@@ -20,12 +20,13 @@ public class KeyListener implements NativeKeyListener {
     private final Robot r;
     private final int seconds = Main.getConfiguration().getStorage().getRepairCooldownInSeconds();
     private final boolean anvil = Main.getConfiguration().getStorage().isAnvil();
+    private final String key = Main.getConfiguration().getStorage().getKey();
 
 
     @Override
     @SneakyThrows
     public void nativeKeyPressed(NativeKeyEvent nativeKeyEvent) {
-        if (NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()).equalsIgnoreCase(Main.getConfiguration().getStorage().getKey())) {
+        if (NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()).equalsIgnoreCase(key)) {
             Main.setEnabled(!Main.isEnabled());
             new AppleProgram(r, seconds, anvil).start();
         }
