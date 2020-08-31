@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.Getter;
 import lombok.SneakyThrows;
+import org.jetbrains.annotations.NotNull;
 import xyz.sadcenter.apples.configuration.storage.ConfigurationStorage;
 
 import java.io.File;
@@ -23,7 +24,7 @@ public final class Configuration {
     private ConfigurationStorage storage;
 
     @SneakyThrows
-    public Configuration(File file) {
+    public Configuration(@NotNull File file) {
         this.file = file;
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdir();

@@ -1,6 +1,7 @@
 package xyz.sadcenter.apples.apple;
 
 import lombok.SneakyThrows;
+import org.jetbrains.annotations.NotNull;
 import xyz.sadcenter.apples.Main;
 import xyz.sadcenter.apples.helper.KeyHelper;
 
@@ -21,7 +22,7 @@ public final class AppleProgram extends Thread {
     private long repair;
     private int slot;
 
-    public AppleProgram(Robot robot, int seconds, boolean anvil) {
+    public AppleProgram(@NotNull Robot robot, int seconds, boolean anvil) {
         super();
         setDaemon(true);
         this.robot = robot;
