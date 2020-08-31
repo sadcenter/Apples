@@ -26,7 +26,7 @@ public class KeyListener implements NativeKeyListener {
     @SneakyThrows
     public void nativeKeyPressed(NativeKeyEvent nativeKeyEvent) {
         if (NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()).equalsIgnoreCase(Main.getConfiguration().getStorage().getKey())) {
-            Main.setEnabled(Main.isEnabled());
+            Main.setEnabled(!Main.isEnabled());
             new AppleProgram(r, seconds, anvil).start();
         }
     }
