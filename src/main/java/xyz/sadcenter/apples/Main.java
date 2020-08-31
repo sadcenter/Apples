@@ -1,6 +1,7 @@
 package xyz.sadcenter.apples;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.SneakyThrows;
 import org.jnativehook.GlobalScreen;
 import xyz.sadcenter.apples.configuration.Configuration;
@@ -9,7 +10,6 @@ import xyz.sadcenter.apples.listener.KeyListener;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -25,10 +25,11 @@ import java.util.logging.Logger;
 
 public class Main {
 
-    public static boolean isEnabled;
-
     @Getter
     private static final Configuration configuration = new Configuration(new File("config", "config.json"));
+    @Getter
+    @Setter
+    public static boolean enabled;
 
     @SneakyThrows
     public static void main(String... args) {

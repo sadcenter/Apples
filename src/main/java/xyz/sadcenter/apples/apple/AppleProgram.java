@@ -1,15 +1,11 @@
 package xyz.sadcenter.apples.apple;
 
 import lombok.SneakyThrows;
-import lombok.val;
-import org.jnativehook.keyboard.NativeKeyEvent;
 import xyz.sadcenter.apples.Main;
 import xyz.sadcenter.apples.helper.KeyHelper;
 
 import java.awt.*;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -17,12 +13,12 @@ import java.util.concurrent.TimeUnit;
  * @project Jablka
  */
 
-public final class AppleProgram extends Thread{
+public final class AppleProgram extends Thread {
 
     private final Robot robot;
-    private long sleeped;
     private final boolean anvil;
     private final int seconds;
+    private long sleeped;
     private int slot;
 
     public AppleProgram(Robot robot, int seconds, boolean anvil) {
@@ -55,7 +51,7 @@ public final class AppleProgram extends Thread{
 
     @SneakyThrows
     void repair() {
-        if(this.anvil) {
+        if (this.anvil) {
             Point point = MouseInfo.getPointerInfo().getLocation();
             sleep(100L);
             robot.mouseMove((int) point.getX() + 5000, (int) point.getY());
@@ -67,7 +63,7 @@ public final class AppleProgram extends Thread{
             clickInAnvil(16);
             robot.mouseMove(858, 477);
             clickInAnvil(16);
-            robot.mouseMove(KeyHelper.getPointfromSlot(slot), 664);
+            robot.mouseMove(KeyHelper.getLocationFromSlot(slot), 664);
             clickInAnvil(16);
             robot.mouseMove(948, 473);
             clickInAnvil(16);
@@ -124,15 +120,15 @@ public final class AppleProgram extends Thread{
         clickKey(KeyEvent.VK_E);
         clickKey(KeyEvent.VK_R);
         clickKey(KeyEvent.VK_ENTER);
-        Main.isEnabled = true;
+        Main.setEnabled(true);
     }
 
-    @Override @SneakyThrows
+    @Override
+    @SneakyThrows
     public void run() {
-        if(!Main.isEnabled) {
+        if (!Main.isEnabled())
             this.stop();
-            return;
-        }
+
 
         clickMouse(16);
         sleep(50L);
@@ -149,7 +145,7 @@ public final class AppleProgram extends Thread{
         clickKey(KeyEvent.VK_1);
         sleep(50L);
 
-        if(sleeped < System.currentTimeMillis()) {
+        if (sleeped < System.currentTimeMillis()) {
             sleeped = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(seconds);
             repair();
             sleep(250L);

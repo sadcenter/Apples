@@ -18,17 +18,17 @@ import java.io.FileWriter;
 public final class Configuration {
 
     private final File file;
+    private final Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
     @Getter
     private ConfigurationStorage storage;
-    private final Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
     @SneakyThrows
     public Configuration(File file) {
         this.file = file;
-        if(!file.getParentFile().exists()) {
+        if (!file.getParentFile().exists()) {
             file.getParentFile().mkdir();
         }
-        if(!file.exists()) {
+        if (!file.exists()) {
             file.createNewFile();
             storage = new ConfigurationStorage();
             saveConfiguration();

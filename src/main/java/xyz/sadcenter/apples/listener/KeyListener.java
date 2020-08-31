@@ -18,27 +18,24 @@ import java.awt.*;
 public class KeyListener implements NativeKeyListener {
 
     private final Robot r;
+    private final int seconds = Main.getConfiguration().getStorage().getRepairCooldownInSeconds();
+    private final boolean anvil = Main.getConfiguration().getStorage().isAnvil();
 
 
-    @Override @SneakyThrows
+    @Override
+    @SneakyThrows
     public void nativeKeyPressed(NativeKeyEvent nativeKeyEvent) {
-        if(nativeKeyEvent.getKeyCode() == NativeKeyEvent.VC_F7) {
-            Point c = MouseInfo.getPointerInfo().getLocation();
-            System.out.println(c.x + " " +c.y);
-        }
-        if(NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()).equalsIgnoreCase(Main.getConfiguration().getStorage().getKey())) {
-            Main.isEnabled = !Main.isEnabled;
-            new AppleProgram(r, Main.getConfiguration().getStorage().getRepairCooldownInSeconds(), Main.getConfiguration().getStorage().isAnvil()).start();
+        if (NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()).equalsIgnoreCase(Main.getConfiguration().getStorage().getKey())) {
+            Main.setEnabled(Main.isEnabled());
+            new AppleProgram(r, seconds, anvil).start();
         }
     }
 
     @Override
     public void nativeKeyReleased(NativeKeyEvent nativeKeyEvent) {
-
     }
 
     @Override
     public void nativeKeyTyped(NativeKeyEvent nativeKeyEvent) {
-
     }
 }
