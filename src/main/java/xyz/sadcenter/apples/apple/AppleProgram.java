@@ -18,14 +18,14 @@ public final class AppleProgram extends Thread {
     private final Robot robot;
     private final boolean anvil;
     private final int seconds;
-    private long sleeped;
+    private long repair;
     private int slot;
 
     public AppleProgram(Robot robot, int seconds, boolean anvil) {
         super();
         setDaemon(true);
         this.robot = robot;
-        this.sleeped = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(seconds);
+        this.repair = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(seconds);
         this.anvil = anvil;
         this.seconds = seconds;
         this.slot = 3;
@@ -145,8 +145,8 @@ public final class AppleProgram extends Thread {
         clickKey(KeyEvent.VK_1);
         sleep(50L);
 
-        if (sleeped < System.currentTimeMillis()) {
-            sleeped = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(seconds);
+        if (repair < System.currentTimeMillis()) {
+            repair = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(seconds);
             repair();
             sleep(250L);
             advertisement();
